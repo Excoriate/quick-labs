@@ -4,11 +4,13 @@ repos:
       rev: v1.35.1
       hooks:
           - id: yamllint
+            exclude: .*compose\.yml$
 
     - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
       rev: 0.2.3
       hooks:
           - id: yamlfmt
+            exclude: .*compose\.yml$
 
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.5.0
@@ -21,6 +23,7 @@ repos:
           - id: check-symlinks
           - id: check-toml
           - id: check-yaml
+            exclude: .*compose\.yml$
           - id: check-json
           - id: detect-private-key
           - id: end-of-file-fixer
