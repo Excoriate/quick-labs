@@ -1,3 +1,4 @@
+---
 services:
   # Service A Configuration
   # Rationale: Defines a microservice with explicit build, networking, and runtime configurations
@@ -5,129 +6,129 @@ services:
   # - Isolated service with specific resource constraints
   # - Secure environment variable management
   # - Robust health checking and restart policies
-  service-a:
+    service-a:
     # Build configuration with caching strategy to optimize image build performance
     # Uses alpine as a base image for minimal image size and security
-    build:
-      context: ./service-a  # Specifies build context for service-a
-      dockerfile: Dockerfile  # Uses custom Dockerfile for precise build control
-      cache_from:
-        - alpine:latest  # Leverages alpine image cache to speed up builds
+        build:
+            context: ./service-a # Specifies build context for service-a
+            dockerfile: Dockerfile # Uses custom Dockerfile for precise build control
+            cache_from:
+                - alpine:latest # Leverages alpine image cache to speed up builds
 
     # Port mapping for external service accessibility
     # Exposes service internally on port 8080
-    ports:
-      - "8080:8080"
+        ports:
+            - 8080:8080
 
     # Environment configuration for runtime behavior and security
     # Follows 12-factor app methodology for configuration management
-    environment:
-      - PORT=8080  # Explicit port configuration
-      - AUTH_KEY=service-a-secret-key  # Secure authentication key (note: in production, use secrets management)
-      - LOG_LEVEL=info  # Standardized logging configuration
-      - ENVIRONMENT=production  # Environment-specific configuration
+        environment:
+            - PORT=8080 # Explicit port configuration
+            - AUTH_KEY=service-a-secret-key # Secure authentication key (note: in production, use secrets management)
+            - LOG_LEVEL=info # Standardized logging configuration
+            - ENVIRONMENT=production # Environment-specific configuration
 
     # Resource allocation and limits
     # Prevents single service from consuming excessive system resources
     # Ensures predictable performance and prevents "noisy neighbor" problems
-    deploy:
-      resources:
+        deploy:
+            resources:
         # Hard limits to prevent service from overwhelming host
-        limits:
-          cpus: '0.50'  # Maximum 50% of a CPU core
-          memory: 256M  # Maximum 256MB memory
+                limits:
+                    cpus: '0.50' # Maximum 50% of a CPU core
+                    memory: 256M # Maximum 256MB memory
         # Minimum resources guaranteed to the service
-        reservations:
-          cpus: '0.25'  # Minimum 25% of a CPU core
-          memory: 128M  # Minimum 128MB memory
+                reservations:
+                    cpus: '0.25' # Minimum 25% of a CPU core
+                    memory: 128M # Minimum 128MB memory
 
     # Robust health checking mechanism
     # Ensures service is truly ready before considering it operational
     # Prevents routing traffic to a service that isn't fully initialized
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/health || exit 1"]  # Checks service health endpoint with shell
-      interval: 10s  # Reduce interval for faster detection
-      timeout: 5s  # Shorter timeout
-      retries: 5  # More retries
-      start_period: 60s  # Longer start period to allow full initialization
+        healthcheck:
+            test: [CMD-SHELL, wget -qO- http://localhost:8080/health || exit 1] # Checks service health endpoint with shell
+            interval: 10s # Reduce interval for faster detection
+            timeout: 5s # Shorter timeout
+            retries: 5 # More retries
+            start_period: 60s # Longer start period to allow full initialization
 
     # Restart policy for improved service resilience
     # Automatically restarts service on unexpected termination
-    restart: on-failure
+        restart: on-failure
 
     # Logging configuration for observability and log management
     # Prevents log files from consuming excessive disk space
-    logging:
-      driver: "json-file"  # Standard JSON logging for structured logs
-      options:
-        max-size: "10m"  # Rotates log files at 10MB
-        max-file: "3"  # Keeps maximum 3 log files
+        logging:
+            driver: json-file # Standard JSON logging for structured logs
+            options:
+                max-size: 10m # Rotates log files at 10MB
+                max-file: '3' # Keeps maximum 3 log files
 
     # Network configuration for inter-service communication
     # Uses a bridge network for isolated, secure communication
-    networks:
-      - app_network
+        networks:
+            - app_network
 
   # Service B Configuration
   # Similar rationale to Service A, with additional inter-service dependency
-  service-b:
+    service-b:
     # Build configuration mirroring Service A
-    build:
-      context: ./service-b
-      dockerfile: Dockerfile
-      cache_from:
-        - alpine:latest
+        build:
+            context: ./service-b
+            dockerfile: Dockerfile
+            cache_from:
+                - alpine:latest
 
     # Unique port mapping for Service B
-    ports:
-      - "8081:8081"
+        ports:
+            - 8081:8081
 
     # Environment configuration with inter-service communication details
-    environment:
-      - PORT=8081  # Unique port for Service B
-      - SERVICE_A_URL=http://service-a:8080  # Internal service discovery
-      - SERVICE_A_AUTH_KEY=service-a-secret-key  # Shared authentication mechanism
-      - LOG_LEVEL=info
-      - ENVIRONMENT=production
+        environment:
+            - PORT=8081 # Unique port for Service B
+            - SERVICE_A_URL=http://service-a:8080 # Internal service discovery
+            - SERVICE_A_AUTH_KEY=service-a-secret-key # Shared authentication mechanism
+            - LOG_LEVEL=info
+            - ENVIRONMENT=production
 
     # Resource allocation identical to Service A
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 256M
-        reservations:
-          cpus: '0.25'
-          memory: 128M
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
+                    memory: 256M
+                reservations:
+                    cpus: '0.25'
+                    memory: 128M
 
     # Dependency management ensuring Service A is healthy before starting Service B
     # Prevents potential race conditions during service startup
-    depends_on:
-      service-a:
-        condition: service_healthy
+        depends_on:
+            service-a:
+                condition: service_healthy
 
     # Health checking mechanism for Service B
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8081/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 60s
+        healthcheck:
+            test: [CMD-SHELL, wget -qO- http://localhost:8081/health || exit 1]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 60s
 
     # Restart and logging policies consistent with Service A
-    restart: on-failure
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+        restart: on-failure
+        logging:
+            driver: json-file
+            options:
+                max-size: 10m
+                max-file: '3'
 
     # Network configuration for inter-service communication
-    networks:
-      - app_network
+        networks:
+            - app_network
 
 # Network definition for inter-service communication
 # Bridge network provides isolated network space for services
 networks:
-  app_network:
-    driver: bridge  # Standard bridge network for container isolation
+    app_network:
+        driver: bridge # Standard bridge network for container isolation
