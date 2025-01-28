@@ -46,7 +46,7 @@ services:
     # Ensures service is truly ready before considering it operational
     # Prevents routing traffic to a service that isn't fully initialized
         healthcheck:
-            test: [CMD-SHELL, wget -qO- http://localhost:8080/health || exit 1] # Checks service health endpoint with shell
+            test: [CMD-SHELL, wget -qO- http://localhost:8080/health || exit 1]         # Checks service health endpoint with shell
             interval: 10s # Reduce interval for faster detection
             timeout: 5s # Shorter timeout
             retries: 5 # More retries
@@ -61,7 +61,7 @@ services:
         logging:
             driver: json-file # Standard JSON logging for structured logs
             options:
-                max-size: 10m # Rotates log files at 10MB
+                max-size: 10m   # Rotates log files at 10MB
                 max-file: '3' # Keeps maximum 3 log files
 
     # Network configuration for inter-service communication
