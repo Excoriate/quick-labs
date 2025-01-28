@@ -1,0 +1,38 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Source code
+*.py text diff=python
+*.go text diff=golang
+*.rs text diff=rust
+*.js text
+*.ts text
+*.jsx text
+*.tsx text
+*.json text
+*.yaml text
+*.yml text
+
+# Documentation
+*.md text diff=markdown
+*.txt text
+
+# Shell scripts
+*.sh text eol=lf
+*.bash text eol=lf
+*.zsh text eol=lf
+
+# Ignore files in export
+.gitignore export-ignore
+.gitattributes export-ignore
+
+# Linguist language detection
+*.hcl linguist-language=HCL
+*.tf linguist-language=HCL
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary

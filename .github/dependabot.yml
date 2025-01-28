@@ -1,0 +1,70 @@
+version: 2
+
+updates:
+  # Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "python"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "alextorresruiz"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "alextorresruiz"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # Docker dependencies
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "docker"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "alextorresruiz"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # Terraform dependencies
+  - package-ecosystem: "terraform"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "terraform"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "alextorresruiz"
+    commit-message:
+      prefix: "chore(deps)"
+
+# Security and vulnerability settings
+vulnerability-alerts:
+  # Enable vulnerability alerts for all package ecosystems
+  enabled: true
+
+# Rebase strategy
+rebase-strategy: auto

@@ -1,0 +1,76 @@
+---
+# Number of days of inactivity before an issue becomes stale
+daysUntilStale: 90
+# Number of days of inactivity before a stale issue is closed
+daysUntilClose: 14
+# Issues with these labels will never be considered stale
+exemptLabels:
+  - pinned
+  - security
+  - infra/critical
+  - infra/core-component
+  - tool/core-functionality
+  - multi-tool/integration
+# Label to use when marking an issue as stale
+staleLabel: stale
+# Comment to post when marking an issue as stale
+markComment: >
+  This issue in the Quick Labs repository has been automatically marked as stale
+  due to lack of recent activity. It will be closed if no further interaction occurs
+  within 14 days. If this lab or tool enhancement is still relevant,
+  please comment to keep it open. 🏗️
+# Comment to post when closing a stale issue
+closeComment: >
+  This issue has been automatically closed due to inactivity in the Quick Labs repository.
+  If the lab or tool enhancement is still relevant, please reopen and provide updated context.
+  Feel free to create a new issue with the most recent information. 👋
+
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v8
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Issues configuration
+          stale-issue-label: 'stale'
+          stale-issue-message: >
+            This issue has been automatically marked as stale because it has not had
+            recent activity. It will be closed if no further activity occurs. Thank you
+            for your contributions! If this issue is still relevant, please comment
+            and the stale status will be removed.
+          days-before-issue-stale: 60
+          days-before-issue-close: 7
+
+          # Pull Request configuration
+          stale-pr-label: 'stale'
+          stale-pr-message: >
+            This pull request has been automatically marked as stale because it has not had
+            recent activity. It will be closed if no further activity occurs. Thank you
+            for your contribution! If this pull request is still being worked on, please
+            comment and the stale status will be removed.
+          days-before-pr-stale: 45
+          days-before-pr-close: 7
+
+          # Exemptions
+          exempt-issue-labels:
+            - 'bug'
+            - 'enhancement'
+            - 'help wanted'
+            - 'in progress'
+          exempt-pr-labels:
+            - 'in progress'
+            - 'review needed'
+            - 'work in progress'
+
+          # Additional configuration
+          only-labels: false
+          start-date: '2023-01-01'
+          delete-branch: true

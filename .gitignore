@@ -1,0 +1,88 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Compiled files
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# Environment and Dependency Management
+.env
+.venv/
+venv/
+env/
+ENV/
+*.env
+.python-version
+
+# Package managers
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnp/
+.pnp.js
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+
+# Cloud Provider Credentials
+*.pem
+*.key
+*.crt
+*credentials*
+*secret*
+
+# Build and Temporary files
+build/
+dist/
+tmp/
+temp/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Backup files
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+# Specific to DevOps tools
+.vagrant/
+packer_cache/
+crash.log
+
+# Security scan results
+*.sarif
+*.brakeman.json
+
+# Misc
+.history/
+.cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+.cursor
