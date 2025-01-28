@@ -7,10 +7,10 @@ daysUntilClose: 30
 responseRequiredLabel: needs-info
 # Comment to post when closing an Issue for lack of response. Set to `false` to disable
 closeComment: >-
-  This issue has been automatically closed due to lack of response.
-  For Terragrunt Labs infrastructure testing issues, please provide:
-  - Specific infrastructure scenarios, and Terragrunt/Terraform configuration details
-  - Error logs or screenshots
-  - Environment and tool versions
+    This issue has been automatically closed due to lack of response.
+    For Terragrunt Labs infrastructure testing issues, please provide:
+    - Specific infrastructure scenarios, and Terragrunt/Terraform configuration details
+    - Error logs or screenshots
+    - Environment and tool versions
 
-  Feel free to reopen with more details. 🏗️
+    Feel free to reopen with more details. 🏗️

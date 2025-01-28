@@ -1,14 +1,14 @@
 ---
 pullRequestOpened: |-
-  :wave: Thanks for contributing to Quick Labs!
+    :wave: Thanks for contributing to Quick Labs!
 
-  Before we can merge this PR, please ensure:
-  - [ ] Followed best practices and linting rules
-  - [ ] Linked to relevant issue (if applicable)
+    Before we can merge this PR, please ensure:
+    - [ ] Followed best practices and linting rules
+    - [ ] Linked to relevant issue (if applicable)
 
-  Quick Labs Specific Checklist:
-  - [ ] Followed project style guidelines
-  - [ ] Added comments in complex areas
-  - [ ] Updated documentation
+    Quick Labs Specific Checklist:
+    - [ ] Followed project style guidelines
+    - [ ] Added comments in complex areas
+    - [ ] Updated documentation
 
-  Thank you for improving Quick Labs! 🚀
+    Thank you for improving Quick Labs! 🚀
